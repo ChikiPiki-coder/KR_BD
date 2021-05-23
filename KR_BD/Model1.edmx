@@ -1,0 +1,603 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище KR_BDModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Citizen">
+          <Key>
+            <PropertyRef Name="idCitizen" />
+          </Key>
+          <Property Name="idCitizen" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="Male" Type="nchar" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ContactComm">
+          <Key>
+            <PropertyRef Name="IdLink" />
+          </Key>
+          <Property Name="IdLink" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="Website" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Mail" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Duty">
+          <Key>
+            <PropertyRef Name="ID_Duty" />
+          </Key>
+          <Property Name="ID_Duty" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="20" />
+          <Property Name="Age" Type="smallint" Nullable="false" />
+          <Property Name="Male" Type="nchar" MaxLength="3" Nullable="false" />
+          <Property Name="Position" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DutyPart">
+          <Key>
+            <PropertyRef Name="DutyOfficer" />
+          </Key>
+          <Property Name="DutyOfficer" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="District" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="TheNumberOfEmployees" Type="int" Nullable="false" />
+          <Property Name="Warehouse" Type="bigint" Nullable="false" />
+          <Property Name="Connection" Type="bigint" Nullable="false" />
+          <Property Name="Request" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Request">
+          <Key>
+            <PropertyRef Name="IdApplicaton" />
+          </Key>
+          <Property Name="IdApplicaton" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Citizen" Type="bigint" Nullable="false" />
+          <Property Name="TheEssenceOfTheApplication" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="DepartureDate" Type="date" Nullable="false" />
+          <Property Name="ReplyDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Warehouse">
+          <Key>
+            <PropertyRef Name="IdWarehouse" />
+          </Key>
+          <Property Name="IdWarehouse" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Document" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Weapon" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="SpecialMeans" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="MeansOfCommunication" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "KR_BD.dbo.NormTableDutyPart" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="NormTableDutyPart">
+          <Key>
+            <PropertyRef Name="City" />
+            <PropertyRef Name="District" />
+            <PropertyRef Name="Expr1" />
+            <PropertyRef Name="TheNumberOfEmployees" />
+            <PropertyRef Name="Telephone" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="MiddleName" />
+            <PropertyRef Name="TheEssenceOfTheApplication" />
+            <PropertyRef Name="DepartureDate" />
+            <PropertyRef Name="ReplyDate" />
+          </Key>
+          <Property Name="City" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="District" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Expr1" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="TheNumberOfEmployees" Type="int" Nullable="false" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="TheEssenceOfTheApplication" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="DepartureDate" Type="date" Nullable="false" />
+          <Property Name="ReplyDate" Type="date" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "KR_BD.dbo.NormTableRequest" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="NormTableRequest">
+          <Key>
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="MiddleName" />
+            <PropertyRef Name="TheEssenceOfTheApplication" />
+            <PropertyRef Name="DepartureDate" />
+            <PropertyRef Name="ReplyDate" />
+          </Key>
+          <Property Name="LastName" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="TheEssenceOfTheApplication" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="DepartureDate" Type="date" Nullable="false" />
+          <Property Name="ReplyDate" Type="date" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_DutyPart_ContactComm">
+          <End Role="ContactComm" Type="Self.ContactComm" Multiplicity="1" />
+          <End Role="DutyPart" Type="Self.DutyPart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactComm">
+              <PropertyRef Name="IdLink" />
+            </Principal>
+            <Dependent Role="DutyPart">
+              <PropertyRef Name="Connection" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DutyPart_Duty">
+          <End Role="Duty" Type="Self.Duty" Multiplicity="1" />
+          <End Role="DutyPart" Type="Self.DutyPart" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Duty">
+              <PropertyRef Name="ID_Duty" />
+            </Principal>
+            <Dependent Role="DutyPart">
+              <PropertyRef Name="DutyOfficer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DutyPart_Request">
+          <End Role="Request" Type="Self.Request" Multiplicity="1" />
+          <End Role="DutyPart" Type="Self.DutyPart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Request">
+              <PropertyRef Name="IdApplicaton" />
+            </Principal>
+            <Dependent Role="DutyPart">
+              <PropertyRef Name="Request" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DutyPart_Warehouse">
+          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="1" />
+          <End Role="DutyPart" Type="Self.DutyPart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="IdWarehouse" />
+            </Principal>
+            <Dependent Role="DutyPart">
+              <PropertyRef Name="Warehouse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Request_Citizen">
+          <End Role="Citizen" Type="Self.Citizen" Multiplicity="1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Citizen">
+              <PropertyRef Name="idCitizen" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="Citizen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище KR_BDModelContainer">
+          <EntitySet Name="Citizen" EntityType="Self.Citizen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContactComm" EntityType="Self.ContactComm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Duty" EntityType="Self.Duty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DutyPart" EntityType="Self.DutyPart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Request" EntityType="Self.Request" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Warehouse" EntityType="Self.Warehouse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NormTableDutyPart" EntityType="Self.NormTableDutyPart" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [NormTableDutyPart].[City] AS [City], 
+    [NormTableDutyPart].[District] AS [District], 
+    [NormTableDutyPart].[Expr1] AS [Expr1], 
+    [NormTableDutyPart].[TheNumberOfEmployees] AS [TheNumberOfEmployees], 
+    [NormTableDutyPart].[Telephone] AS [Telephone], 
+    [NormTableDutyPart].[LastName] AS [LastName], 
+    [NormTableDutyPart].[FirstName] AS [FirstName], 
+    [NormTableDutyPart].[MiddleName] AS [MiddleName], 
+    [NormTableDutyPart].[TheEssenceOfTheApplication] AS [TheEssenceOfTheApplication], 
+    [NormTableDutyPart].[DepartureDate] AS [DepartureDate], 
+    [NormTableDutyPart].[ReplyDate] AS [ReplyDate]
+    FROM [dbo].[NormTableDutyPart] AS [NormTableDutyPart]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="NormTableRequest" EntityType="Self.NormTableRequest" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [NormTableRequest].[LastName] AS [LastName], 
+    [NormTableRequest].[FirstName] AS [FirstName], 
+    [NormTableRequest].[MiddleName] AS [MiddleName], 
+    [NormTableRequest].[TheEssenceOfTheApplication] AS [TheEssenceOfTheApplication], 
+    [NormTableRequest].[DepartureDate] AS [DepartureDate], 
+    [NormTableRequest].[ReplyDate] AS [ReplyDate]
+    FROM [dbo].[NormTableRequest] AS [NormTableRequest]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_DutyPart_ContactComm" Association="Self.FK_DutyPart_ContactComm">
+            <End Role="ContactComm" EntitySet="ContactComm" />
+            <End Role="DutyPart" EntitySet="DutyPart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DutyPart_Duty" Association="Self.FK_DutyPart_Duty">
+            <End Role="Duty" EntitySet="Duty" />
+            <End Role="DutyPart" EntitySet="DutyPart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DutyPart_Request" Association="Self.FK_DutyPart_Request">
+            <End Role="Request" EntitySet="Request" />
+            <End Role="DutyPart" EntitySet="DutyPart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DutyPart_Warehouse" Association="Self.FK_DutyPart_Warehouse">
+            <End Role="Warehouse" EntitySet="Warehouse" />
+            <End Role="DutyPart" EntitySet="DutyPart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Request_Citizen" Association="Self.FK_Request_Citizen">
+            <End Role="Citizen" EntitySet="Citizen" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KR_BDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Citizen">
+          <Key>
+            <PropertyRef Name="idCitizen" />
+          </Key>
+          <Property Name="idCitizen" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LastName" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="Male" Type="String" MaxLength="3" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Request" Relationship="Self.FK_Request_Citizen" FromRole="Citizen" ToRole="Request" />
+        </EntityType>
+        <EntityType Name="ContactComm">
+          <Key>
+            <PropertyRef Name="IdLink" />
+          </Key>
+          <Property Name="IdLink" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Telephone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Website" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Mail" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DutyPart" Relationship="Self.FK_DutyPart_ContactComm" FromRole="ContactComm" ToRole="DutyPart" />
+        </EntityType>
+        <EntityType Name="Duty">
+          <Key>
+            <PropertyRef Name="ID_Duty" />
+          </Key>
+          <Property Name="ID_Duty" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="Int16" Nullable="false" />
+          <Property Name="Male" Type="String" MaxLength="3" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Position" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DutyPart" Relationship="Self.FK_DutyPart_Duty" FromRole="Duty" ToRole="DutyPart" />
+        </EntityType>
+        <EntityType Name="DutyPart">
+          <Key>
+            <PropertyRef Name="DutyOfficer" />
+          </Key>
+          <Property Name="DutyOfficer" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="City" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="District" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TheNumberOfEmployees" Type="Int32" Nullable="false" />
+          <Property Name="Warehouse" Type="Int64" Nullable="false" />
+          <Property Name="Connection" Type="Int64" Nullable="false" />
+          <Property Name="Request" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="ContactComm" Relationship="Self.FK_DutyPart_ContactComm" FromRole="DutyPart" ToRole="ContactComm" />
+          <NavigationProperty Name="Duty" Relationship="Self.FK_DutyPart_Duty" FromRole="DutyPart" ToRole="Duty" />
+          <NavigationProperty Name="Request1" Relationship="Self.FK_DutyPart_Request" FromRole="DutyPart" ToRole="Request" />
+          <NavigationProperty Name="Warehouse1" Relationship="Self.FK_DutyPart_Warehouse" FromRole="DutyPart" ToRole="Warehouse" />
+        </EntityType>
+        <EntityType Name="Request">
+          <Key>
+            <PropertyRef Name="IdApplicaton" />
+          </Key>
+          <Property Name="IdApplicaton" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Citizen" Type="Int64" Nullable="false" />
+          <Property Name="TheEssenceOfTheApplication" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DepartureDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ReplyDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Citizen1" Relationship="Self.FK_Request_Citizen" FromRole="Request" ToRole="Citizen" />
+          <NavigationProperty Name="DutyPart" Relationship="Self.FK_DutyPart_Request" FromRole="Request" ToRole="DutyPart" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Warehouse">
+          <Key>
+            <PropertyRef Name="IdWarehouse" />
+          </Key>
+          <Property Name="IdWarehouse" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Document" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Weapon" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SpecialMeans" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MeansOfCommunication" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DutyPart" Relationship="Self.FK_DutyPart_Warehouse" FromRole="Warehouse" ToRole="DutyPart" />
+        </EntityType>
+        <EntityType Name="NormTableDutyPart">
+          <Key>
+            <PropertyRef Name="City" />
+            <PropertyRef Name="District" />
+            <PropertyRef Name="Expr1" />
+            <PropertyRef Name="TheNumberOfEmployees" />
+            <PropertyRef Name="Telephone" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="MiddleName" />
+            <PropertyRef Name="TheEssenceOfTheApplication" />
+            <PropertyRef Name="DepartureDate" />
+            <PropertyRef Name="ReplyDate" />
+          </Key>
+          <Property Name="City" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="District" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Expr1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TheNumberOfEmployees" Type="Int32" Nullable="false" />
+          <Property Name="Telephone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TheEssenceOfTheApplication" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DepartureDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ReplyDate" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="NormTableRequest">
+          <Key>
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="MiddleName" />
+            <PropertyRef Name="TheEssenceOfTheApplication" />
+            <PropertyRef Name="DepartureDate" />
+            <PropertyRef Name="ReplyDate" />
+          </Key>
+          <Property Name="LastName" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TheEssenceOfTheApplication" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DepartureDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ReplyDate" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <Association Name="FK_Request_Citizen">
+          <End Role="Citizen" Type="Self.Citizen" Multiplicity="1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Citizen">
+              <PropertyRef Name="idCitizen" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="Citizen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DutyPart_ContactComm">
+          <End Role="ContactComm" Type="Self.ContactComm" Multiplicity="1" />
+          <End Role="DutyPart" Type="Self.DutyPart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactComm">
+              <PropertyRef Name="IdLink" />
+            </Principal>
+            <Dependent Role="DutyPart">
+              <PropertyRef Name="Connection" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DutyPart_Duty">
+          <End Role="Duty" Type="Self.Duty" Multiplicity="1" />
+          <End Role="DutyPart" Type="Self.DutyPart" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Duty">
+              <PropertyRef Name="ID_Duty" />
+            </Principal>
+            <Dependent Role="DutyPart">
+              <PropertyRef Name="DutyOfficer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DutyPart_Request">
+          <End Role="Request" Type="Self.Request" Multiplicity="1" />
+          <End Role="DutyPart" Type="Self.DutyPart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Request">
+              <PropertyRef Name="IdApplicaton" />
+            </Principal>
+            <Dependent Role="DutyPart">
+              <PropertyRef Name="Request" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DutyPart_Warehouse">
+          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="1" />
+          <End Role="DutyPart" Type="Self.DutyPart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="IdWarehouse" />
+            </Principal>
+            <Dependent Role="DutyPart">
+              <PropertyRef Name="Warehouse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KR_BDEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Citizen" EntityType="Self.Citizen" />
+          <EntitySet Name="ContactComm" EntityType="Self.ContactComm" />
+          <EntitySet Name="Duty" EntityType="Self.Duty" />
+          <EntitySet Name="DutyPart" EntityType="Self.DutyPart" />
+          <EntitySet Name="Request" EntityType="Self.Request" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Warehouse" EntityType="Self.Warehouse" />
+          <EntitySet Name="NormTableDutyPart" EntityType="Self.NormTableDutyPart" />
+          <EntitySet Name="NormTableRequest" EntityType="Self.NormTableRequest" />
+          <AssociationSet Name="FK_Request_Citizen" Association="Self.FK_Request_Citizen">
+            <End Role="Citizen" EntitySet="Citizen" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DutyPart_ContactComm" Association="Self.FK_DutyPart_ContactComm">
+            <End Role="ContactComm" EntitySet="ContactComm" />
+            <End Role="DutyPart" EntitySet="DutyPart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DutyPart_Duty" Association="Self.FK_DutyPart_Duty">
+            <End Role="Duty" EntitySet="Duty" />
+            <End Role="DutyPart" EntitySet="DutyPart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DutyPart_Request" Association="Self.FK_DutyPart_Request">
+            <End Role="Request" EntitySet="Request" />
+            <End Role="DutyPart" EntitySet="DutyPart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DutyPart_Warehouse" Association="Self.FK_DutyPart_Warehouse">
+            <End Role="Warehouse" EntitySet="Warehouse" />
+            <End Role="DutyPart" EntitySet="DutyPart" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище KR_BDModelContainer" CdmEntityContainer="KR_BDEntities">
+          <EntitySetMapping Name="Citizen">
+            <EntityTypeMapping TypeName="KR_BDModel.Citizen">
+              <MappingFragment StoreEntitySet="Citizen">
+                <ScalarProperty Name="idCitizen" ColumnName="idCitizen" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Male" ColumnName="Male" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContactComm">
+            <EntityTypeMapping TypeName="KR_BDModel.ContactComm">
+              <MappingFragment StoreEntitySet="ContactComm">
+                <ScalarProperty Name="IdLink" ColumnName="IdLink" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Duty">
+            <EntityTypeMapping TypeName="KR_BDModel.Duty">
+              <MappingFragment StoreEntitySet="Duty">
+                <ScalarProperty Name="ID_Duty" ColumnName="ID_Duty" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Male" ColumnName="Male" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DutyPart">
+            <EntityTypeMapping TypeName="KR_BDModel.DutyPart">
+              <MappingFragment StoreEntitySet="DutyPart">
+                <ScalarProperty Name="DutyOfficer" ColumnName="DutyOfficer" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="District" ColumnName="District" />
+                <ScalarProperty Name="TheNumberOfEmployees" ColumnName="TheNumberOfEmployees" />
+                <ScalarProperty Name="Warehouse" ColumnName="Warehouse" />
+                <ScalarProperty Name="Connection" ColumnName="Connection" />
+                <ScalarProperty Name="Request" ColumnName="Request" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Request">
+            <EntityTypeMapping TypeName="KR_BDModel.Request">
+              <MappingFragment StoreEntitySet="Request">
+                <ScalarProperty Name="IdApplicaton" ColumnName="IdApplicaton" />
+                <ScalarProperty Name="Citizen" ColumnName="Citizen" />
+                <ScalarProperty Name="TheEssenceOfTheApplication" ColumnName="TheEssenceOfTheApplication" />
+                <ScalarProperty Name="DepartureDate" ColumnName="DepartureDate" />
+                <ScalarProperty Name="ReplyDate" ColumnName="ReplyDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="KR_BDModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Warehouse">
+            <EntityTypeMapping TypeName="KR_BDModel.Warehouse">
+              <MappingFragment StoreEntitySet="Warehouse">
+                <ScalarProperty Name="IdWarehouse" ColumnName="IdWarehouse" />
+                <ScalarProperty Name="Document" ColumnName="Document" />
+                <ScalarProperty Name="Weapon" ColumnName="Weapon" />
+                <ScalarProperty Name="SpecialMeans" ColumnName="SpecialMeans" />
+                <ScalarProperty Name="MeansOfCommunication" ColumnName="MeansOfCommunication" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NormTableDutyPart">
+            <EntityTypeMapping TypeName="KR_BDModel.NormTableDutyPart">
+              <MappingFragment StoreEntitySet="NormTableDutyPart">
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="District" ColumnName="District" />
+                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+                <ScalarProperty Name="TheNumberOfEmployees" ColumnName="TheNumberOfEmployees" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="TheEssenceOfTheApplication" ColumnName="TheEssenceOfTheApplication" />
+                <ScalarProperty Name="DepartureDate" ColumnName="DepartureDate" />
+                <ScalarProperty Name="ReplyDate" ColumnName="ReplyDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NormTableRequest">
+            <EntityTypeMapping TypeName="KR_BDModel.NormTableRequest">
+              <MappingFragment StoreEntitySet="NormTableRequest">
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="TheEssenceOfTheApplication" ColumnName="TheEssenceOfTheApplication" />
+                <ScalarProperty Name="DepartureDate" ColumnName="DepartureDate" />
+                <ScalarProperty Name="ReplyDate" ColumnName="ReplyDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

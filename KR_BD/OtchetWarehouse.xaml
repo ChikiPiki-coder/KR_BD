@@ -1,0 +1,93 @@
+﻿<Window x:Class="KR_BD.OtchetWarehouse"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KR_BD"
+        mc:Ignorable="d"
+        Title="OtchetWarehouse" Height="450" Width="498.8" Loaded="Window_Loaded_1">
+    <Window.Resources>
+        <CollectionViewSource x:Key="warehouseViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Warehouse}, CreateList=True}"/>
+        <RoutedUICommand x:Key="FirstCommand" Text="First"/>
+        <RoutedUICommand x:Key="LastCommand" Text="Last"/>
+        <RoutedUICommand x:Key="NextCommand" Text="Next"/>
+        <RoutedUICommand x:Key="PreviousCommand" Text="Previous"/>
+        <RoutedUICommand x:Key="DeleteSupplyCommand" Text="Delete Customer"/>
+        <RoutedUICommand x:Key="UpdateCommand" Text="Update"/>
+        <RoutedUICommand x:Key="AddCommand" Text="Add"/>
+        <RoutedUICommand x:Key="CancelCommand" Text="Cancel"/>
+        <Style x:Key="NavButton" TargetType="{x:Type Button}" BasedOn="{x:Null}">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontFamily" Value="Segoe UI Symbol"/>
+            <Setter Property="Margin" Value="2,2,2,0"/>
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Height" Value="auto"/>
+        </Style>
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="{StaticResource FirstCommand}" Executed="FirstCommandHandler"/>
+        <CommandBinding Command="{StaticResource LastCommand}" Executed="LastCommandHandler"/>
+        <CommandBinding Command="{StaticResource NextCommand}" Executed="NextCommandHandler"/>
+        <CommandBinding Command="{StaticResource PreviousCommand}" Executed="PreviousCommandHandler"/>
+        <CommandBinding Command="{StaticResource CancelCommand}" Executed="Button_Exit"/>
+        <CommandBinding Command="{StaticResource AddCommand}" Executed="AddCommandHandler"/>
+    </Window.CommandBindings>
+    <Grid DataContext="{StaticResource warehouseViewSource}">
+        <StackPanel Orientation="Horizontal"  Height="37" VerticalAlignment="Top" Background="White" DataContext="{StaticResource warehouseViewSource}" Margin="81,280,34.8,0">
+            <Button Name="btnFirst" Content="|◄" Command="{StaticResource FirstCommand}" Style="{StaticResource NavButton}" Width="40" Height="36" VerticalAlignment="Top" Margin="2,0"/>
+            <Button x:Name="btnPrev" Content="◄" Command="{StaticResource PreviousCommand}" Style="{StaticResource NavButton}" Width="40" Margin="0" />
+            <Button x:Name="btnNext" Content="►" Command="{StaticResource NextCommand}" Style="{StaticResource NavButton}" Width="40" Margin="2,0" />
+            <Button Name="btnLast" Content="►|" Command="{StaticResource LastCommand}" Style="{StaticResource NavButton}" Width="40" Margin="2,0"/>
+            <Button x:Name="btnAdd" Content="Сохранить" Command="{StaticResource AddCommand}" FontSize="11" Width="80" Style="{StaticResource NavButton}" Margin="2,0"/>
+            <Button Content="Закрыть" x:Name="btnCancel" Command="{StaticResource CancelCommand}" FontSize="11" Width="54" Style="{StaticResource NavButton}" Height="36" VerticalAlignment="Top"  Margin="2,0"/>
+        </StackPanel>
+        <ListView x:Name="warehouseListView" ItemsSource="{Binding}" Margin="0,0,9.8,166" SelectionMode="Single">
+            <ListView.ItemContainerStyle>
+                <Style>
+                    <Setter Property="Control.HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="Control.VerticalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn x:Name="idWarehouseColumn" Header="ID Склада" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Margin="6,-1,-6,-1" Text="{Binding IdWarehouse, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Background="Silver"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="documentColumn" Header="Документ" Width="auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Margin="-6,-1" Text="{Binding Document, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Background="Gold"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="meansOfCommunicationColumn" Header="Средства Связи" Width="auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Margin="-6,-1" Text="{Binding MeansOfCommunication, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Background="Gold"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="specialMeansColumn" Header="Специальные Средства" Width="auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Margin="-6,-1" Text="{Binding SpecialMeans, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Background="Gold"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="weaponColumn" Header="Оружиев" Width="auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Margin="-6,-1" Text="{Binding Weapon, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Background="Gold"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+    </Grid>
+</Window>
